@@ -1,16 +1,73 @@
 <script>
+import axios from 'axios';
+import { apiUriMovie, apiUriTv, config } from './data/index'
+import { store } from './data/store'
+import AppHeader from './components/AppHeader.vue';
 export default {
   name: 'App',
   data() {
     return {
-
-
+      apiUriMovie,
+      apiUriTv,
+      config,
+      store,
+      movieUrlGenerated: '',
+      seriesUrlGenerated: '',
     }
   },
+  components: { AppHeader },
+  methods: {
+
+    // SUBMIT YOUR SEARCH WITH CREATED URL
+    researchApiUri(apiUri) {
+      axios.get(apiUri).then(res => {
+
+        // CONTINUE IF THE URL IS OF THE MOVIE
+        if (apiUri === this.movieUrlGenerated) {
+          // MOUNTED ARRAY MOVIES IN STORE
+          const movies = res.data.results;
+          // NEW ARREY WITH KEYS REQUIRED
+          store.movies = movies.map(movie => {
+            const { original_title, title, original_language, vote_average, poster_path } = movie;
+            // CHANGE KEY NAME
+            return { originalTitle: original_title, title, language: original_language, vote: vote_average, poster: poster_path };
+          });
+
+          // CONTINUE IF THE URL IS OF THE SERIE TV
+        } else if (apiUri === this.seriesUrlGenerated) {
+          // MOUNTED ARRAY TVSERIES IN STORE
+          const tvSeries = res.data.results;
+          // NEW ARREY WITH KEYS REQUIRED
+          store.tvSeries = tvSeries.map(tv => {
+            const { original_name, name, original_language, vote_average, poster_path } = tv;
+            // CHANGE KEY NAME
+            return { originalTitle: original_name, title: name, language: original_language, vote: vote_average, poster: poster_path };
+          });
+        }
+      }).catch(err => { console.error(err) }).then(() => { })
+    },
+    // REFRESH YOUR SEARCH FOR EACH ENTERED LETTER
+    nameFilm(param) {
+      this.config.params.query = param;
+    },
+    // SUBMIT SEARCH
+    sendName() {
+      // MOVIES URL CREATION
+      const urlMovie = `${this.config.params.baseUri}${this.apiUriMovie}${this.config.params.api_key}&query=${this.config.params.query}&language=${this.config.params.language}`
+      this.movieUrlGenerated = urlMovie;
+      this.researchApiUri(urlMovie);
+      // SERIES TV URL CREATION
+      const urlTvSeries = `${this.config.params.baseUri}${this.apiUriTv}${this.config.params.api_key}&query=${this.config.params.query}&language=${this.config.params.language}`
+      this.seriesUrlGenerated = urlTvSeries;
+      this.researchApiUri(urlTvSeries);
+
+    }
+  }
 }
 </script>
 
 <template>
+
 
 
 </template>
