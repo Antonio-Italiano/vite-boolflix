@@ -68,7 +68,27 @@ export default {
 
 <template>
 
-
+  <app-header @research="nameFilm" @send-research="sendName"></app-header>
+  <ul v-if="store.movies.length">
+    <h1 class="text-danger">film</h1>
+    <li v-for="m in store.movies">
+      <h1>titolo: {{ m.title }}</h1>
+      <h2>titolo originale: {{ m.originalTitle }}</h2>
+      <h4>lingua: {{ m.language }}</h4>
+      <h6>voto: {{ m.vote }}</h6>
+      <img :src="'https://image.tmdb.org/t/p/w342/' + m.poster" :alt="m.title">
+    </li>
+  </ul>
+  <ul v-if="store.tvSeries.length" class="my-5">
+    <h1 class="text-danger">serie Tv</h1>
+    <li v-for="m in store.tvSeries">
+      <h1>titolo: {{ m.title }}</h1>
+      <h2>titolo originale: {{ m.originalTitle }}</h2>
+      <h4>lingua: {{ m.language }}</h4>
+      <h6>voto: {{ m.vote }}</h6>
+      <img :src="'https://image.tmdb.org/t/p/w342/' + m.poster" :alt="m.title">
+    </li>
+  </ul>
 
 </template>
 
