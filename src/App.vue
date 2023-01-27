@@ -1,21 +1,21 @@
 <script>
 import axios from 'axios';
-import { apiUriMovie, apiUriTv, config } from './data/index'
+import { config } from './data/index'
 import { store } from './data/store'
 import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
 export default {
   name: 'App',
   data() {
     return {
-      apiUriMovie,
-      apiUriTv,
       config,
       store,
+      query: '',
       movieUrlGenerated: '',
       seriesUrlGenerated: '',
     }
   },
-  components: { AppHeader },
+  components: { AppHeader, AppMain },
   methods: {
 
     // SUBMIT YOUR SEARCH WITH CREATED URL
@@ -48,16 +48,17 @@ export default {
     },
     // REFRESH YOUR SEARCH FOR EACH ENTERED LETTER
     nameFilm(param) {
-      this.config.params.query = param;
+      this.query = param;
     },
     // SUBMIT SEARCH
-    sendName() {
+    sendUrl() {
       // MOVIES URL CREATION
-      const urlMovie = `${this.config.params.baseUri}${this.apiUriMovie}${this.config.params.api_key}&query=${this.config.params.query}&language=${this.config.params.language}`
+      const urlMovie = `${this.config.baseUri}${this.config.apiUriMovie}${this.config.api_key}&query=${this.query}&language=${this.config.language}`
+      console.log(urlMovie);
       this.movieUrlGenerated = urlMovie;
       this.researchApiUri(urlMovie);
       // SERIES TV URL CREATION
-      const urlTvSeries = `${this.config.params.baseUri}${this.apiUriTv}${this.config.params.api_key}&query=${this.config.params.query}&language=${this.config.params.language}`
+      const urlTvSeries = `${this.config.baseUri}${this.config.apiUriTv}${this.config.api_key}&query=${this.query}&language=${this.config.language}`
       this.seriesUrlGenerated = urlTvSeries;
       this.researchApiUri(urlTvSeries);
 
@@ -68,7 +69,8 @@ export default {
 
 <template>
 
-  <app-header @research="nameFilm" @send-research="sendName"></app-header>
+  <app-header @research="nameFilm" @send-research="sendUrl"></app-header>
+  <app-main></app-main>
   <ul v-if="store.movies.length">
     <h1 class="text-danger">film</h1>
     <li v-for="m in store.movies">
