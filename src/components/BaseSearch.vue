@@ -27,7 +27,7 @@ export default {
 
     <form v-if="asClicked" class="" @submit.prevent="$emit('form-submit')">
         <input v-model.trim="term" type="text" :placeholder="placeholder || 'cerca'" @keyup="$emit('change-term', term)"
-            @keyup.enter="changeParam">
+            @keyup.enter="changeParam" @keyup.esc="changeParam">
     </form>
 </template>
 

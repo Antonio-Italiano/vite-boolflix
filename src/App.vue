@@ -71,18 +71,12 @@ export default {
 
   <app-header @research="nameFilm" @send-research="sendUrl"></app-header>
   <app-main></app-main>
-  <!-- <ul v-if="store.movies.length">
-    <h1 class="text-danger">film</h1>
-    <li v-for="m in store.movies">
-      <h1>titolo: {{ m.title }}</h1>
-      <h2>titolo originale: {{ m.originalTitle }}</h2>
-      <h4>lingua: {{ m.language }}</h4>
-      <h6>voto: {{ m.vote }}</h6>
-      <img :src="'https://image.tmdb.org/t/p/w342/' + m.poster" :alt="m.title">
-    </li>
-  </ul> -->
+
 </template>
 
-<style>
-
+<style lang="scss">
+.container-fluid {
+  max-width: 1400px;
+  margin: 0 auto;
+}
 </style>

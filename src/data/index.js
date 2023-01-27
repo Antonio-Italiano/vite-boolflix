@@ -5,4 +5,6 @@ const config = {
     apiUriMovie: '/search/movie',
     apiUriTv: '/search/tv',
 }
-export { config };
+
+const navElement = ['Home', 'Serie TV', 'Film', 'Nuovi e popolari', 'La mia lista', 'Sfoglia per lingua'];
+export { config, navElement };
