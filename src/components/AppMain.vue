@@ -12,11 +12,11 @@ export default {
 <template>
     <main>
         <section id="movies" class="container-fluid">
-            <div class="row py-5">
+            <div v-if="store.movies.length" class="row py-5">
                 <h2>FILM</h2>
                 <production-card v-for="m in store.movies" :key="m.id" :item="m"></production-card>
             </div>
-            <div class="row">
+            <div v-if="store.series.length" class="row">
                 <h2>SERIE TV</h2>
                 <production-card v-for="s in store.series" :key="s.id" :item="s"></production-card>
             </div>
@@ -25,12 +25,13 @@ export default {
 </template>
 <style lang="scss" scoped>
 main {
-    height: 100%;
+    min-height: 100vh;
     background-color: #2d2d2f;
+    padding: 70px 0;
 
     .row {
-        flex-wrap: wrap;
-        color: rgb(179, 3, 3);
+        color: rgb(255, 2, 2);
+        text-shadow: 1px 1px 2px black;
     }
 }
 </style>

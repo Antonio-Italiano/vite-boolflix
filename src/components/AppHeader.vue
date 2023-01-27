@@ -43,6 +43,10 @@ console.log(navElement);
 <style lang="scss" scoped>
 header {
     height: 70px;
+    width: 100vw;
+    position: fixed;
+    z-index: 2;
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
 
     ul {
         list-style-type: none;
