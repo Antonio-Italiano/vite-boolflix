@@ -12,26 +12,27 @@ export default {
     components: { BaseSearch, AppLogo },
     emits: ['research', 'send-research']
 }
-console.log(navElement); 
 </script>
 
 <template>
     <header class="bg-dark">
         <div class="container-fluid h-100">
             <div class="row align-items-center h-100">
-                <div class="col-2">
-                    <app-logo textLogo="BOOLFLIX"></app-logo>
+                <div class="col-2 w-auto">
+                    <a href="#" class="text-decoration-none">
+                        <app-logo textLogo="BOOLFLIX"></app-logo>
+                    </a>
                 </div>
-                <div class="col-7">
-                    <ul class="d-flex align-items-center m-0">
-                        <li v-for="i in navElement" class="mx-3">
+                <div class="col-7 px-0">
+                    <ul class="d-flex align-items-center p-0 m-0">
+                        <li v-for="i in navElement" class="mx-2">
                             <a href="#" class="text-white text-decoration-none">
                                 <p class="mb-0">{{ i }}</p>
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-2 text-end">
+                <div class="col-2 d-flex justify-content-end">
                     <base-search @change-term="$emit('research', $event)" @form-submit="$emit('send-research')"
                         placeholder="cerca un film..."></base-search>
                 </div>
@@ -50,7 +51,16 @@ header {
 
     ul {
         list-style-type: none;
+
+        p {
+            text-shadow: 0px 2px 1px rgb(0, 0, 0);
+            font-size: 14px;
+        }
+
     }
 
+    li:hover p {
+        text-shadow: 0px 0px 1px rgb(255, 255, 255);
+    }
 }
 </style>

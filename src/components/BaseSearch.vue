@@ -33,6 +33,17 @@ export default {
 
 <style lang="scss" scoped>
 .search {
-    cursor: pointer;
+    width: 20px;
+
+    .cursore {
+        cursor: pointer;
+    }
+
+    &.search:hover .cursore {
+        scale: 1.2;
+        text-shadow: 0px 0px 1px rgb(255, 255, 255);
+
+    }
+
 }
 </style>

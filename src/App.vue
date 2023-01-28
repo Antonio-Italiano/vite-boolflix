@@ -28,9 +28,9 @@ export default {
           const movies = res.data.results;
           // NEW ARREY WITH KEYS REQUIRED
           store.movies = movies.map(movie => {
-            const { original_title, title, original_language, vote_average, poster_path } = movie;
+            const { original_title, title, original_language, vote_average, poster_path, overview, release_date } = movie;
             // CHANGE KEY NAME
-            return { originalTitle: original_title, title, language: original_language, vote: vote_average, poster: poster_path };
+            return { originalTitle: original_title, title, language: original_language, vote: vote_average, poster: poster_path, overview, release_date };
           });
 
           // CONTINUE IF THE URL IS OF THE SERIE TV
@@ -39,9 +39,9 @@ export default {
           const series = res.data.results;
           // NEW ARREY WITH KEYS REQUIRED
           store.series = series.map(tv => {
-            const { original_name, name, original_language, vote_average, poster_path } = tv;
+            const { original_name, name, original_language, vote_average, poster_path, overview, first_air_date } = tv;
             // CHANGE KEY NAME
-            return { originalTitle: original_name, title: name, language: original_language, vote: vote_average, poster: poster_path };
+            return { originalTitle: original_name, title: name, language: original_language, vote: vote_average, poster: poster_path, overview, first_air_date };
           });
         }
       }).catch(err => { console.error(err) }).then(() => { })

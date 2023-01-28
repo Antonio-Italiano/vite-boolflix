@@ -4,10 +4,13 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // IMPORT FONTAWESOME
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHatWizard, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faHatWizard, faMagnifyingGlass);
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar, farStar, faMagnifyingGlass);
 
 const app = createApp(App)
 // GLOBAL COMPONENTS 

@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-    <h2 class="logo">{{ textLogo }}</h2>
+    <h2 class="logo m-0">{{ textLogo }}</h2>
 </template>
 
 <style lang="scss">
