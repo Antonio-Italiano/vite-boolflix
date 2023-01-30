@@ -1,19 +1,15 @@
 <script>
+import { store } from '../../data/store'
 export default {
     name: 'BaseSearch',
     data() {
-        return {
-            term: '',
-            asClicked: false,
-        }
+        return { term: '', store }
     },
-    props: {
-        placeholder: String
-    },
+    props: { placeholder: String },
     emits: ['change-term', 'form-submit'],
     methods: {
         changeParam() {
-            this.asClicked = !this.asClicked;
+            this.store.asClicked = !this.store.asClicked;
             this.term = '';
         }
     }
@@ -21,11 +17,12 @@ export default {
 </script>
 
 <template>
-    <div v-if="!asClicked" class="search" @click="changeParam">
+    <!-- ICON SEARCH  -->
+    <div v-if="!store.asClicked" class="search" @click="changeParam">
         <font-awesome-icon class="text-white cursore" icon="fa-solid fa-magnifying-glass" />
     </div>
-
-    <form v-if="asClicked" class="" @submit.prevent="$emit('form-submit')">
+    <!-- INPUT  -->
+    <form v-if="store.asClicked" class="" @submit.prevent="$emit('form-submit')">
         <input v-model.trim="term" type="text" :placeholder="placeholder || 'cerca'" @keyup="$emit('change-term', term)"
             @keyup.enter="changeParam" @keyup.esc="changeParam">
     </form>
@@ -42,8 +39,6 @@ export default {
     &.search:hover .cursore {
         scale: 1.2;
         text-shadow: 0px 0px 1px rgb(255, 255, 255);
-
     }
-
 }
 </style>

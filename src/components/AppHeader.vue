@@ -1,11 +1,13 @@
 <script>
 import { navElement } from '../data/index'
 import AppLogo from './production/AppLogo.vue';
-import BaseSearch from './BaseSearch.vue';
+import BaseSearch from './production/BaseSearch.vue';
+import { store } from '../data/store';
 export default {
     name: 'AppHeader',
     data() {
         return {
+            store,
             navElement
         }
     },
@@ -32,9 +34,19 @@ export default {
                         </li>
                     </ul>
                 </div>
-                <div class="col-2 d-flex justify-content-end">
+                <div class="col-1 d-flex justify-content-end">
                     <base-search @change-term="$emit('research', $event)" @form-submit="$emit('send-research')"
                         placeholder="cerca un film..."></base-search>
+                </div>
+                <div v-if="store.firstName" class="col-1 profile d-flex align-items-center">
+                    <img src="../assets/img/user.png" :alt="store.firstName">
+                    <p class="text-white mb-0 mx-3 fs-5">{{ store.firstName }}</p>
+                    <select name="manu" id="manu">
+                        <option value="Gestiscione">Gestisci i profili</option>
+                        <option value="Trasferimento">Trasferisci profilo</option>
+                        <option value="Account">Account</option>
+                        <option value="Assistenza">Centro Assistenza</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -48,6 +60,32 @@ header {
     position: fixed;
     z-index: 2;
     box-shadow: 0px 0px 5px rgb(0, 0, 0);
+
+    select {
+        font-size: 15px;
+        width: 70px;
+        border: 0;
+        background-color: transparent;
+        color: #fff;
+
+        option {
+            background-color: black;
+        }
+    }
+
+    .profile {
+        img {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+        }
+
+        select {
+            width: 20px;
+            background-color: transparent;
+            color: #fff;
+        }
+    }
 
     ul {
         list-style-type: none;
